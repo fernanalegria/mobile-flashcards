@@ -10,7 +10,7 @@ const addCard = (card, deckId) => ({
 export const handleAddCard = (card, deckId) => dispatch =>
   saveCard(card, deckId).then(result => {
     dispatch(addCard(result, deckId));
-    Promise.resolve(result);
+    return Promise.resolve(result);
   });
 
 const receiveCards = cards => ({
