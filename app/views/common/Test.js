@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Text, AsyncStorage } from 'react-native';
 import { deckActions } from 'state/decks';
+import { cardActions } from 'state/cards';
 import { connect } from 'react-redux';
 import { STORAGE_KEYS } from 'utils/constants';
 
 class Test extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(deckActions.handleReceiveDecks()).then(() => {
-      dispatch(deckActions.handleCreateDeck('React Deck'));
-    });
+    Promise.all([
+      dispatch(deckActions.handleReceiveDecks()),
+      dispatch(cardActions.handleReceiveCards())
+    ]);
   }
 
   render() {
