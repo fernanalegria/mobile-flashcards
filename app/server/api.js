@@ -21,7 +21,7 @@ const mergeDecks = (title, decks) => {
         id,
         title,
         cards: [],
-        createdDate: new Date()
+        createdDate: (new Date()).toISOString()
       }
     }
   };
@@ -37,7 +37,7 @@ const mergeCards = (question, answer, cards) => {
         id,
         question,
         answer,
-        createdDate: new Date()
+        createdDate: (new Date()).toISOString()
       }
     }
   };
@@ -53,7 +53,7 @@ const mergeQuizzes = (deck, quizzes) => {
         id,
         deck,
         results: {},
-        startDate: new Date()
+        startDate: (new Date()).toISOString()
       }
     }
   };

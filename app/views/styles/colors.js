@@ -1,5 +1,4 @@
 export const purple = '#292477';
-export const gray = '#757575';
 export const white = '#fff';
 export const red = '#b71845';
 export const orange = '#f26f28';
@@ -10,3 +9,4 @@ export const black = '#000';
 export const blackShadow = 'rgba(0,0,0,0.24)';
 export const whiteShadow = 'rgba(255, 255, 255, 0.1)';
 export const boulder = '#757575';
+export const athensGray = '#f7f7f8';

@@ -6,7 +6,7 @@ import { colors } from './app/views/styles';
 import { PLATFORM } from './app/views/utils/constants';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import StatusBarWrapper from './app/views/common/StatusBarWrapper';
-import DeckList from './app/views/screens/DeckList';
+import DeckList from './app/views/screens/DeckList/DeckList';
 import NewDeck from './app/views/screens/NewDeck';
 import {
   createBottomTabNavigator,

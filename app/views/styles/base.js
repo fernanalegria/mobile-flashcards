@@ -12,9 +12,19 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
   title: {
     color: colors.black,
     fontSize: 35,
     ... textCenter
+  },
+  noDataText: {
+    fontSize: 20,
+    paddingTop: 20,
+    paddingBottom: 20
   }
 });
