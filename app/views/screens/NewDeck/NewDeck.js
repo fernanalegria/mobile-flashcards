@@ -4,6 +4,7 @@ import baseStyles, { colors } from '../../styles';
 import { connect } from 'react-redux';
 import { deckActions } from 'state/decks';
 import InputForm from './InputForm';
+import base from '../../styles/base';
 
 class NewDeck extends Component {
   createNewDeck = title => {
@@ -13,7 +14,7 @@ class NewDeck extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={base.container}>
         <Text style={styles.text}>Let's get started!</Text>
         <Text style={styles.title}>What's the title of your new deck?</Text>
         <InputForm writeText={this.createNewDeck} />
@@ -23,11 +24,6 @@ class NewDeck extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
   text: {
     ...baseStyles.textCenter,
     color: colors.black,
