@@ -18,7 +18,7 @@ class DeckList extends Component {
     });
   }
 
-  renderItem = ({ item }) => <DeckListItem deck={item} />;
+  renderItem = ({ item }) => <DeckListItem deck={item} navigation={this.props.navigation} />;
 
   render() {
     const { isLoading } = this.state;

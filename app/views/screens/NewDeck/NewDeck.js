@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { deckActions } from 'state/decks';
 import InputForm from './InputForm';
 import base from '../../styles/base';
+import { ROUTES } from '../../utils/constants';
 
 class NewDeck extends Component {
   createNewDeck = title => {
     const { createDeck, navigation } = this.props;
-    return createDeck(title).then(() => navigation.navigate('DeckList'));
+    return createDeck(title).then(() => navigation.navigate(ROUTES.DeckList));
   };
 
   render() {
