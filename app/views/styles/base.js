@@ -20,11 +20,15 @@ export default StyleSheet.create({
   title: {
     color: colors.black,
     fontSize: 35,
-    ... textCenter
+    ...textCenter
   },
   noDataText: {
     fontSize: 20,
     paddingTop: 20,
     paddingBottom: 20
+  },
+  buttonContent: {
+    fontSize: 22,
+    color: colors.white
   }
 });

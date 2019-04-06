@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import SubmitButton from '../../common/SubmitButton';
+import { Button, Form } from '../../common';
 import { colors } from '../../styles';
 
 class InputForm extends Component {
@@ -25,7 +25,7 @@ class InputForm extends Component {
   render() {
     const { title } = this.state;
     return (
-      <View style={styles.form}>
+      <Form>
         <TextInput
           value={title}
           style={styles.input}
@@ -33,12 +33,12 @@ class InputForm extends Component {
           placeholder="Deck Title"
           clearButtonMode="always"
         />
-        <SubmitButton
+        <Button
           text="Create"
           style={{ margin: 25 }}
           onPress={this.submitAndClear}
         />
-      </View>
+      </Form>
     );
   }
 }

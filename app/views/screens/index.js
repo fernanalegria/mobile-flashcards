@@ -1,5 +1,3 @@
-import DeckDetail from './DeckDetail';
-import DeckList from './DeckList';
-import NewDeck from './NewDeck';
-
-export { DeckDetail, DeckList, NewDeck };
+export { default as DeckDetail } from './DeckDetail';
+export { default as DeckList } from './DeckList';
+export { default as NewDeck } from './NewDeck';
