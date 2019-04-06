@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 import { Form, Button } from '../../common';
 import baseStyles from '../../styles';
+import { cardActions } from 'state/cards';
+import { connect } from 'react-redux';
 
 class NewCard extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -25,7 +27,13 @@ class NewCard extends Component {
     });
   };
 
-  submit = () => {};
+  submit = () => {
+    const { question, answer } = this.state;
+    const { navigation, addCardToDeck } = this.props;
+    addCardToDeck(question, answer, navigation.getParam('deckId')).then(() => {
+      navigation.goBack();
+    });
+  };
 
   render() {
     const { question, answer } = this.state;
@@ -53,4 +61,12 @@ class NewCard extends Component {
   }
 }
 
-export default NewCard;
+const mapDispatchToProps = {
+  addCardToDeck: (question, answer, deckId) =>
+    cardActions.handleAddCard({ question, answer }, deckId)
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewCard);

@@ -6,6 +6,7 @@ import { Form, Button } from '../../common';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { PLATFORM, ROUTES } from '../../utils/constants';
 import { deckActions } from 'state/decks';
+import { getNumberOfCards } from 'utils/helpers';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -50,7 +51,7 @@ class DeckDetail extends Component {
           <View style={styles.container}>
             <View style={styles.detail}>
               <Text style={styles.title}>{deck.title}</Text>
-              <Text style={styles.text}>{deck.cards.length} cards</Text>
+              <Text style={styles.text}>{getNumberOfCards(deck.cards)}</Text>
             </View>
             <Form>
               <Button
