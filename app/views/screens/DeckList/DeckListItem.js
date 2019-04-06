@@ -7,15 +7,15 @@ import {
   Platform
 } from 'react-native';
 import baseStyles, { colors } from '../../styles';
-import { PLATFORM } from '../../utils/constants';
+import { PLATFORM, ROUTES } from '../../utils/constants';
 
-const DeckListItem = ({ deck }) => (
+const DeckListItem = ({ deck, navigation }) => (
   <View style={styles.item}>
     {deck ? (
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Go to deck detail screen');
+          navigation.navigate(ROUTES.DeckDetail, { id: deck.id, title: deck.title });
         }}
       >
         <View style={styles.deckCard}>
