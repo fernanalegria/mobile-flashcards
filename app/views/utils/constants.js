@@ -7,5 +7,6 @@ export const ROUTES = {
   Home: 'Home',
   DeckList: 'DeckList',
   NewDeck: 'NewDeck',
-  DeckDetail: 'DeckDetail'
+  DeckDetail: 'DeckDetail',
+  NewCard: 'NewCard'
 };

@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { Text, View, StyleSheet, Platform } from 'react-native';
+import { Text, View, StyleSheet, Platform, Animated } from 'react-native';
 import baseStyles, { colors } from '../../styles';
 import { connect } from 'react-redux';
 import { Form, Button } from '../../common';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { PLATFORM, ROUTES } from '../../utils/constants';
 import { deckActions } from 'state/decks';
+import { getNumberOfCards } from 'utils/helpers';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -34,6 +35,18 @@ class DeckDetail extends Component {
     title: navigation.getParam('title')
   });
 
+  state = {
+    scale: new Animated.Value(1)
+  };
+
+  componentDidUpdate() {
+    const { scale } = this.state;
+    Animated.sequence([
+      Animated.timing(scale, { duration: 200, toValue: 1.2 }),
+      Animated.spring(scale, { toValue: 1, friction: 4 })
+    ]).start();
+  }
+
   deleteDeck = () => {
     const { deck, deleteDeck, navigation } = this.props;
     deleteDeck(deck.id).then(() => {
@@ -42,16 +55,19 @@ class DeckDetail extends Component {
   };
 
   render() {
-    const { deck } = this.props;
+    const { deck, navigation } = this.props;
+    const { scale } = this.state;
 
     return (
       <Fragment>
         {deck ? (
           <View style={styles.container}>
-            <View style={styles.detail}>
+            <Animated.View
+              style={[styles.detail, { transform: [{ scale }] }]}
+            >
               <Text style={styles.title}>{deck.title}</Text>
-              <Text style={styles.text}>{deck.cards.length} cards</Text>
-            </View>
+              <Text style={styles.text}>{getNumberOfCards(deck.cards)}</Text>
+            </Animated.View>
             <Form>
               <Button
                 text="Start Quiz"
@@ -63,7 +79,12 @@ class DeckDetail extends Component {
                 text="Add Card"
                 icon={icons.AddIcon}
                 style={styles.button}
-                onPress={() => {}}
+                onPress={() => {
+                  navigation.navigate(ROUTES.NewCard, {
+                    deckId: deck.id,
+                    deckTitle: deck.title
+                  });
+                }}
               />
               <Button
                 text="Delete Deck"

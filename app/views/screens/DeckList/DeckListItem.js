@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import baseStyles, { colors } from '../../styles';
 import { PLATFORM, ROUTES } from '../../utils/constants';
+import { getNumberOfCards } from 'utils/helpers';
 
 const DeckListItem = ({ deck, navigation }) => (
   <View style={styles.item}>
@@ -20,7 +21,7 @@ const DeckListItem = ({ deck, navigation }) => (
       >
         <View style={styles.deckCard}>
           <Text style={styles.title}>{deck.title}</Text>
-          <Text style={styles.cards}>{deck.cards.length} cards</Text>
+          <Text style={styles.cards}>{getNumberOfCards(deck.cards)}</Text>
         </View>
       </TouchableOpacity>
     ) : (

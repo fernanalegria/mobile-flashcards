@@ -30,5 +30,12 @@ export default StyleSheet.create({
   buttonContent: {
     fontSize: 22,
     color: colors.white
+  },
+  textInput: {
+    height: 44,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: colors.boulder,
+    margin: 25
   }
 });

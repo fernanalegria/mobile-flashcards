@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { Button, Form } from '../../common';
-import { colors } from '../../styles';
+import baseStyles from '../../styles';
 
 class InputForm extends Component {
   state = {
     title: ''
   };
 
-  submitAndClear = () => {
+  submit = () => {
     this.props.writeText(this.state.title).then(() => {
       this.setState({
         title: ''
@@ -28,7 +28,7 @@ class InputForm extends Component {
       <Form>
         <TextInput
           value={title}
-          style={styles.input}
+          style={baseStyles.textInput}
           onChangeText={this.onTitleChange}
           placeholder="Deck Title"
           clearButtonMode="always"
@@ -36,27 +36,11 @@ class InputForm extends Component {
         <Button
           text="Create"
           style={{ margin: 25 }}
-          onPress={this.submitAndClear}
+          onPress={this.submit}
         />
       </Form>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  form: {
-    paddingLeft: 50,
-    paddingRight: 50,
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
-  input: {
-    height: 44,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: colors.boulder,
-    margin: 25
-  }
-});
 
 export default InputForm;
