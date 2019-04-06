@@ -42,7 +42,7 @@ class DeckDetail extends Component {
   };
 
   render() {
-    const { deck } = this.props;
+    const { deck, navigation } = this.props;
 
     return (
       <Fragment>
@@ -63,7 +63,7 @@ class DeckDetail extends Component {
                 text="Add Card"
                 icon={icons.AddIcon}
                 style={styles.button}
-                onPress={() => {}}
+                onPress={() => { navigation.navigate(ROUTES.NewCard, { deckId: deck.id, deckTitle: deck.title }) }}
               />
               <Button
                 text="Delete Deck"

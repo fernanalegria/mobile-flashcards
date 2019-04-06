@@ -6,7 +6,7 @@ import { colors } from './app/views/styles';
 import { PLATFORM } from './app/views/utils/constants';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import StatusBarWrapper from './app/views/common/StatusBarWrapper';
-import { DeckList, NewDeck, DeckDetail } from './app/views/screens';
+import { DeckList, NewDeck, DeckDetail, NewCard } from './app/views/screens';
 import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
@@ -60,6 +60,13 @@ const Tabs = createTabNavigator(
   }
 );
 
+const defaultNavigationOptions = {
+  headerTintColor: colors.white,
+  headerStyle: {
+    backgroundColor: colors.purple
+  }
+};
+
 const AppContainer = createAppContainer(
   createStackNavigator({
     Home: {
@@ -70,12 +77,11 @@ const AppContainer = createAppContainer(
     },
     DeckDetail: {
       screen: DeckDetail,
-      navigationOptions: {
-        headerTintColor: colors.white,
-        headerStyle: {
-          backgroundColor: colors.purple
-        }
-      }
+      navigationOptions: defaultNavigationOptions
+    },
+    NewCard: {
+      screen: NewCard,
+      navigationOptions: defaultNavigationOptions
     }
   })
 );
