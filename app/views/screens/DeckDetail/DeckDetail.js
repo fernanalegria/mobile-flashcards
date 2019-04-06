@@ -4,7 +4,8 @@ import baseStyles, { colors } from '../../styles';
 import { connect } from 'react-redux';
 import { Form, Button } from '../../common';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { PLATFORM } from '../../utils/constants';
+import { PLATFORM, ROUTES } from '../../utils/constants';
+import { deckActions } from 'state/decks';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -32,6 +33,13 @@ class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title')
   });
+
+  deleteDeck = () => {
+    const { deck, deleteDeck, navigation } = this.props;
+    deleteDeck(deck.id).then(() => {
+      navigation.navigate(ROUTES.DeckList);
+    });
+  };
 
   render() {
     const { deck } = this.props;
@@ -61,7 +69,7 @@ class DeckDetail extends Component {
                 text="Delete Deck"
                 icon={icons.DeleteIcon}
                 style={styles.button}
-                onPress={() => {}}
+                onPress={this.deleteDeck}
               />
             </Form>
           </View>
@@ -105,4 +113,11 @@ const mapStateToProps = ({ decks }, { navigation }) => ({
   deck: decks[navigation.getParam('id')]
 });
 
-export default connect(mapStateToProps)(DeckDetail);
+const mapDispatchToProps = {
+  deleteDeck: id => deckActions.handleRemoveDeck(id)
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeckDetail);
