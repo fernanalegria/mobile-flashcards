@@ -10,10 +10,10 @@ class NextQuestion extends Component {
   });
 
   showAnswer = () => {
-    const { navigation, quizId, card } = this.props;
+    const { navigation, quizId, cardId } = this.props;
     navigation.navigate(ROUTES.QuizAnswer, {
       quizId,
-      cardId: card.id,
+      cardId,
       deckTitle: navigation.getParam('deckTitle')
     });
   };
@@ -25,11 +25,11 @@ class NextQuestion extends Component {
       return <Score quizId={quizId} />;
     }
 
-    const { card, current, total } = this.props;
+    const { question, current, total } = this.props;
 
     return (
       <Question
-        question={card.question}
+        question={question}
         current={current}
         total={total}
         showAnswer={this.showAnswer}
@@ -45,13 +45,14 @@ const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
     (a, b) => cards[b].createdDate - cards[a].createdDate
   );
 
-  const getFirstUnansweredCard = id => !quiz.results[id];
+  const getFirstUnansweredCard = id => quiz.results[id] === undefined;
   const cardId = cardIds.find(getFirstUnansweredCard);
 
   const isQuestion = !!cardId;
   const questionProps = isQuestion
     ? {
-        card: cards[cardId],
+        cardId,
+        question: cards[cardId].question,
         current: cardIds.findIndex(getFirstUnansweredCard) + 1,
         total: cardIds.length
       }

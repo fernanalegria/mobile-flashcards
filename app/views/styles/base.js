@@ -17,6 +17,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch'
   },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
   title: {
     color: colors.black,
     fontSize: 35,
