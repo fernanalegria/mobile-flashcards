@@ -22,3 +22,8 @@ export const handleUpdateQuiz = (id, cardId, result) => dispatch =>
     dispatch(updateQuiz(quiz));
     return Promise.resolve(quiz);
   });
+
+export const returnQuiz = id => ({
+  type: types.RETURN_QUIZ,
+  id
+});

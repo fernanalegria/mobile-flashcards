@@ -6,27 +6,32 @@ import { Form, Button } from '../../common';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { PLATFORM, ROUTES } from '../../utils/constants';
 import { deckActions } from 'state/decks';
+import { quizActions } from 'state/quizzes';
 import { getNumberOfCards } from 'utils/helpers';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
 const icons = {
-  StartIcon: Platform.select({
-    [PLATFORM.iOS]: (
-      <Ionicons name="ios-play-circle" size={fontSize} color={color} />
-    ),
-    [PLATFORM.Android]: (
-      <Ionicons name="md-play-circle" size={fontSize} color={color} />
-    )
-  }),
-  AddIcon: Platform.select({
-    [PLATFORM.iOS]: (
-      <Ionicons name="ios-add-circle" size={fontSize} color={color} />
-    ),
-    [PLATFORM.Android]: (
-      <Ionicons name="md-add-circle" size={fontSize} color={color} />
-    )
-  }),
+  StartIcon: (
+    <Ionicons
+      name={Platform.select({
+        [PLATFORM.iOS]: 'ios-play-circle',
+        [PLATFORM.Android]: 'md-play-circle'
+      })}
+      size={fontSize}
+      color={color}
+    />
+  ),
+  AddIcon: (
+    <Ionicons
+      name={Platform.select({
+        [PLATFORM.iOS]: 'ios-add-circle',
+        [PLATFORM.Android]: 'md-add-circle'
+      })}
+      size={fontSize}
+      color={color}
+    />
+  ),
   DeleteIcon: <MaterialIcons name="delete" size={fontSize} color={color} />
 };
 
@@ -54,17 +59,33 @@ class DeckDetail extends Component {
     });
   };
 
-  render() {
+  addCard = () => {
     const { deck, navigation } = this.props;
+    navigation.navigate(ROUTES.NewCard, {
+      deckId: deck.id,
+      deckTitle: deck.title
+    });
+  };
+
+  startQuiz = () => {
+    const { navigation, startQuiz, deck } = this.props;
+    startQuiz(deck.id).then(quiz => {
+      navigation.navigate(ROUTES.QuizNextQuestion, {
+        quizId: quiz.id,
+        deckTitle: deck.title
+      });
+    });
+  };
+
+  render() {
+    const { deck } = this.props;
     const { scale } = this.state;
 
     return (
       <Fragment>
         {deck ? (
           <View style={styles.container}>
-            <Animated.View
-              style={[styles.detail, { transform: [{ scale }] }]}
-            >
+            <Animated.View style={[styles.detail, { transform: [{ scale }] }]}>
               <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.text}>{getNumberOfCards(deck.cards)}</Text>
             </Animated.View>
@@ -73,18 +94,13 @@ class DeckDetail extends Component {
                 text="Start Quiz"
                 icon={icons.StartIcon}
                 style={styles.button}
-                onPress={() => {}}
+                onPress={this.startQuiz}
               />
               <Button
                 text="Add Card"
                 icon={icons.AddIcon}
                 style={styles.button}
-                onPress={() => {
-                  navigation.navigate(ROUTES.NewCard, {
-                    deckId: deck.id,
-                    deckTitle: deck.title
-                  });
-                }}
+                onPress={this.addCard}
               />
               <Button
                 text="Delete Deck"
@@ -135,7 +151,8 @@ const mapStateToProps = ({ decks }, { navigation }) => ({
 });
 
 const mapDispatchToProps = {
-  deleteDeck: id => deckActions.handleRemoveDeck(id)
+  deleteDeck: id => deckActions.handleRemoveDeck(id),
+  startQuiz: id => quizActions.handleStartQuiz(id)
 };
 
 export default connect(

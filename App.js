@@ -6,7 +6,14 @@ import { colors } from './app/views/styles';
 import { PLATFORM } from './app/views/utils/constants';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import StatusBarWrapper from './app/views/common/StatusBarWrapper';
-import { DeckList, NewDeck, DeckDetail, NewCard } from './app/views/screens';
+import {
+  DeckList,
+  NewDeck,
+  DeckDetail,
+  NewCard,
+  QuizAnswer,
+  QuizNextQuestion
+} from './app/views/screens';
 import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
@@ -43,11 +50,11 @@ const Tabs = createTabNavigator(
   {
     tabBarOptions: {
       activeTintColor:
-        Platform.OS === PLATFORM.iOS ? colors.purple : colors.white,
+        Platform.OS === PLATFORM.iOS ? colors.blueWood : colors.white,
       style: {
         height: 56,
         backgroundColor:
-          Platform.OS === PLATFORM.iOS ? colors.white : colors.purple,
+          Platform.OS === PLATFORM.iOS ? colors.white : colors.blueWood,
         shadowRadius: 6,
         shadowOpacity: 1,
         shadowColor: colors.blackShadow,
@@ -55,6 +62,9 @@ const Tabs = createTabNavigator(
           width: 0,
           height: 3
         }
+      },
+      indicatorStyle: {
+        backgroundColor: colors.oceanGreen
       }
     }
   }
@@ -63,17 +73,19 @@ const Tabs = createTabNavigator(
 const defaultNavigationOptions = {
   headerTintColor: colors.white,
   headerStyle: {
-    backgroundColor: colors.purple
+    backgroundColor: colors.blueWood
   }
+};
+
+const noHeader = {
+  header: null
 };
 
 const AppContainer = createAppContainer(
   createStackNavigator({
     Home: {
       screen: Tabs,
-      navigationOptions: {
-        header: null
-      }
+      navigationOptions: noHeader
     },
     DeckDetail: {
       screen: DeckDetail,
@@ -81,6 +93,14 @@ const AppContainer = createAppContainer(
     },
     NewCard: {
       screen: NewCard,
+      navigationOptions: defaultNavigationOptions
+    },
+    QuizNextQuestion: {
+      screen: QuizNextQuestion,
+      navigationOptions: defaultNavigationOptions
+    },
+    QuizAnswer: {
+      screen: QuizAnswer,
       navigationOptions: defaultNavigationOptions
     }
   })
@@ -92,7 +112,7 @@ const App = () => (
   <Provider store={reduxStore}>
     <View style={{ flex: 1 }}>
       <StatusBarWrapper
-        backgroundColor={colors.purple}
+        backgroundColor={colors.blueWood}
         barStyle="light-content"
       />
       <AppContainer />

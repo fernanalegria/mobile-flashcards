@@ -2,16 +2,16 @@ import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import baseStyles, { colors } from '../styles';
 
-const Button = ({ onPress, text, style, icon }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.submitBtn, style]}>
+const Button = ({ onPress, text, style = {}, icon = null }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
     {icon}
-    <Text style={styles.submitBtnText}>{text}</Text>
+    <Text style={styles.text}>{text}</Text>
   </TouchableOpacity>
 );
 
 export const styles = StyleSheet.create({
-  submitBtn: {
-    backgroundColor: colors.purple,
+  container: {
+    backgroundColor: colors.blueWood,
     padding: 10,
     height: 45,
     flexDirection: 'row',
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 7
   },
-  submitBtnText: {
+  text: {
     ...baseStyles.buttonContent,
     textAlign: 'center',
     paddingRight: 20,

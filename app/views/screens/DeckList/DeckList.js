@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { deckActions } from 'state/decks';
+import { cardActions } from 'state/cards';
 import baseStyles, { colors } from '../../styles';
 import DeckListItem from './DeckListItem';
 
@@ -11,23 +12,24 @@ class DeckList extends Component {
   };
 
   componentDidMount() {
-    this.props.getDecks().then(() => {
+    const { getDecks, getCards } = this.props;
+    Promise.all([getDecks(), getCards()]).then(() => {
       this.setState({
         isLoading: false
       });
     });
   }
 
-  renderItem = ({ item }) => <DeckListItem deck={item} navigation={this.props.navigation} />;
+  renderItem = ({ item }) => (
+    <DeckListItem deck={item} navigation={this.props.navigation} />
+  );
 
   render() {
     const { isLoading } = this.state;
     const { decks } = this.props;
 
     return (
-      <View
-        style={styles.container}
-      >
+      <View style={styles.container}>
         {isLoading ? (
           <ActivityIndicator />
         ) : (
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     paddingBottom: 9,
     backgroundColor: colors.athensGray
   }
-})
+});
 
 const mapStateToProps = ({ decks }) => ({
   decks: Object.values(decks).sort(
@@ -58,7 +60,8 @@ const mapStateToProps = ({ decks }) => ({
 });
 
 const mapDispatchToProps = {
-  getDecks: () => deckActions.handleReceiveDecks()
+  getDecks: () => deckActions.handleReceiveDecks(),
+  getCards: () => cardActions.handleReceiveCards()
 };
 
 export default connect(
