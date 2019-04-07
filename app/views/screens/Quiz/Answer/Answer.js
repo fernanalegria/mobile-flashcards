@@ -7,6 +7,7 @@ import AnswerDisplay from './AnswerDisplay';
 import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
 import { ROUTES } from '../../../utils/constants';
+import { getActiveCardId } from 'utils/helpers';
 
 class Answer extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -16,7 +17,7 @@ class Answer extends Component {
   saveResult = result => {
     const { navigation, updateQuiz, quizId, cardId, deckTitle } = this.props;
     updateQuiz(quizId, cardId, result).then(() => {
-      navigation.navigate(ROUTES.QuizNextQuestion, {
+      navigation.push(ROUTES.QuizNextQuestion, {
         quizId,
         deckTitle
       });
@@ -67,11 +68,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ cards }, { navigation }) => {
-  const cardId = navigation.getParam('cardId');
+const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
+  const quizId = navigation.getParam('quizId');
+  const cardId = getActiveCardId(quizzes, decks, cards, quizId);
+
   return {
     cardId,
-    quizId: navigation.getParam('quizId'),
+    quizId,
     deckTitle: navigation.getParam('deckTitle'),
     answer: cards[cardId].answer
   };

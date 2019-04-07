@@ -3,57 +3,83 @@ import { connect } from 'react-redux';
 import Question from './Question';
 import Score from './Score';
 import { ROUTES } from '../../../utils/constants';
+import { quizActions } from 'state/quizzes';
+import { getActiveCardId } from 'utils/helpers';
+import { NavigationEvents } from 'react-navigation';
 
 class NextQuestion extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam('deckTitle')} - Quiz`
   });
 
+  state = {
+    goBack: true
+  };
+
   showAnswer = () => {
-    const { navigation, quizId, cardId } = this.props;
-    navigation.navigate(ROUTES.QuizAnswer, {
-      quizId,
-      cardId,
-      deckTitle: navigation.getParam('deckTitle')
-    });
+    const { navigation, quizId } = this.props;
+    this.setState(
+      {
+        goBack: false
+      },
+      () => {
+        navigation.push(ROUTES.QuizAnswer, {
+          quizId,
+          deckTitle: navigation.getParam('deckTitle')
+        });
+      }
+    );
+  };
+
+  onWillBlur = () => {
+    const { decreaseStep, quizId } = this.props;
+
+    if (this.state.goBack) {
+      decreaseStep(quizId);
+    } else {
+      this.setState({
+        goBack: true
+      });
+    }
   };
 
   render() {
-    const { isQuestion, quizId } = this.props;
-
-    if (!isQuestion) {
-      return <Score quizId={quizId} />;
-    }
-
-    const { question, current, total } = this.props;
+    const { isQuestion, quizId, question, current, total } = this.props;
 
     return (
-      <Question
-        question={question}
-        current={current}
-        total={total}
-        showAnswer={this.showAnswer}
-      />
+      <Fragment>
+        <NavigationEvents onWillBlur={this.onWillBlur} />
+        {isQuestion ? (
+          <Question
+            question={question}
+            current={current}
+            total={total}
+            showAnswer={this.showAnswer}
+          />
+        ) : (
+          <Score quizId={quizId} />
+        )}
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
   const quizId = navigation.getParam('quizId');
-  const quiz = quizzes[quizId];
-  const cardIds = decks[quiz.deck].cards.sort(
-    (a, b) => cards[b].createdDate - cards[a].createdDate
+  const { cardId, cardIds, quiz } = getActiveCardId(
+    quizzes,
+    decks,
+    cards,
+    quizId,
+    true
   );
-
-  const getFirstUnansweredCard = id => quiz.results[id] === undefined;
-  const cardId = cardIds.find(getFirstUnansweredCard);
 
   const isQuestion = !!cardId;
   const questionProps = isQuestion
     ? {
         cardId,
         question: cards[cardId].question,
-        current: cardIds.findIndex(getFirstUnansweredCard) + 1,
+        current: quiz.step + 1,
         total: cardIds.length
       }
     : {};
@@ -65,4 +91,11 @@ const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
   };
 };
 
-export default connect(mapStateToProps)(NextQuestion);
+const mapDispatchToProps = {
+  decreaseStep: id => quizActions.returnQuiz(id)
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NextQuestion);

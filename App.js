@@ -78,17 +78,6 @@ const noHeader = {
   header: null
 };
 
-const Quiz = createStackNavigator({
-  QuizNextQuestion: {
-    screen: QuizNextQuestion,
-    navigationOptions: defaultNavigationOptions
-  },
-  QuizAnswer: {
-    screen: QuizAnswer,
-    navigationOptions: defaultNavigationOptions
-  }
-});
-
 const AppContainer = createAppContainer(
   createStackNavigator({
     Home: {
@@ -103,9 +92,13 @@ const AppContainer = createAppContainer(
       screen: NewCard,
       navigationOptions: defaultNavigationOptions
     },
-    Quiz: {
-      screen: Quiz,
-      navigationOptions: noHeader
+    QuizNextQuestion: {
+      screen: QuizNextQuestion,
+      navigationOptions: defaultNavigationOptions
+    },
+    QuizAnswer: {
+      screen: QuizAnswer,
+      navigationOptions: defaultNavigationOptions
     }
   })
 );
