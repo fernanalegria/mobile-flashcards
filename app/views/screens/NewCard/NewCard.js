@@ -54,7 +54,12 @@ class NewCard extends Component {
             placeholder="What's the answer?"
             clearButtonMode="always"
           />
-          <Button text="Add" style={{ margin: 25 }} onPress={this.submit} />
+          <Button
+            text="Add"
+            style={{ margin: 25 }}
+            onPress={this.submit}
+            disabled={!question || !answer}
+          />
         </Form>
       </KeyboardAvoidingView>
     );
