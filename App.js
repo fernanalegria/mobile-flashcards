@@ -12,8 +12,7 @@ import {
   DeckDetail,
   NewCard,
   QuizAnswer,
-  QuizQuestion,
-  QuizScore
+  QuizNextQuestion
 } from './app/views/screens';
 import {
   createBottomTabNavigator,
@@ -80,16 +79,12 @@ const noHeader = {
 };
 
 const Quiz = createStackNavigator({
-  QuizQuestion: {
-    screen: QuizQuestion,
+  QuizNextQuestion: {
+    screen: QuizNextQuestion,
     navigationOptions: defaultNavigationOptions
   },
   QuizAnswer: {
     screen: QuizAnswer,
-    navigationOptions: defaultNavigationOptions
-  },
-  QuizScore: {
-    screen: QuizScore,
     navigationOptions: defaultNavigationOptions
   }
 });
