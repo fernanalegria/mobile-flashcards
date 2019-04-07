@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 25,
     padding: 20,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.blueWood,
     color: colors.white,
     ...baseStyles.textCenter
   },
   score: {
-    color: colors.purple,
+    color: colors.blueWood,
     fontSize: 50,
     ...baseStyles.textCenter
   },

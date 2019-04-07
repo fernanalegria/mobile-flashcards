@@ -1,4 +1,4 @@
-export const purple = '#292477';
+export const blueWood = '#34495e';
 export const white = '#fff';
 export const red = '#b71845';
 export const orange = '#f26f28';
@@ -11,5 +11,6 @@ export const whiteShadow = 'rgba(255, 255, 255, 0.1)';
 export const boulder = '#757575';
 export const athensGray = '#f7f7f8';
 export const mercury = '#e4e4e4';
-export const doveGrayShadow = 'rgba(108, 108, 108, 0.6)';
+export const doveGrayShadow = 'rgba(108, 108, 108, 0.4)';
 export const doveGray = '#6c6c6c';
+export const oceanGreen = '#42b983';

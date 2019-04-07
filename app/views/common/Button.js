@@ -11,7 +11,7 @@ const Button = ({ onPress, text, style = {}, icon = null }) => (
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.purple,
+    backgroundColor: colors.blueWood,
     padding: 10,
     height: 45,
     flexDirection: 'row',

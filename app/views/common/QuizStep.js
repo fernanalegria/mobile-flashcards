@@ -8,7 +8,7 @@ const QuizStep = ({ current, total }) => (
 
 const styles = StyleSheet.create({
   step: {
-    color: colors.purple,
+    color: colors.blueWood,
     fontSize: 25,
     padding: 10
   }

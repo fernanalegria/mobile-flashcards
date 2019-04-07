@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     ...baseStyles.row,
-    backgroundColor: colors.purple
+    backgroundColor: colors.blueWood
   }
 });
 

@@ -50,11 +50,11 @@ const Tabs = createTabNavigator(
   {
     tabBarOptions: {
       activeTintColor:
-        Platform.OS === PLATFORM.iOS ? colors.purple : colors.white,
+        Platform.OS === PLATFORM.iOS ? colors.blueWood : colors.white,
       style: {
         height: 56,
         backgroundColor:
-          Platform.OS === PLATFORM.iOS ? colors.white : colors.purple,
+          Platform.OS === PLATFORM.iOS ? colors.white : colors.blueWood,
         shadowRadius: 6,
         shadowOpacity: 1,
         shadowColor: colors.blackShadow,
@@ -62,6 +62,9 @@ const Tabs = createTabNavigator(
           width: 0,
           height: 3
         }
+      },
+      indicatorStyle: {
+        backgroundColor: colors.oceanGreen
       }
     }
   }
@@ -70,7 +73,7 @@ const Tabs = createTabNavigator(
 const defaultNavigationOptions = {
   headerTintColor: colors.white,
   headerStyle: {
-    backgroundColor: colors.purple
+    backgroundColor: colors.blueWood
   }
 };
 
@@ -109,7 +112,7 @@ const App = () => (
   <Provider store={reduxStore}>
     <View style={{ flex: 1 }}>
       <StatusBarWrapper
-        backgroundColor={colors.purple}
+        backgroundColor={colors.blueWood}
         barStyle="light-content"
       />
       <AppContainer />
