@@ -26,10 +26,11 @@ class Answer extends Component {
 
   render() {
     const { fontSize, color } = baseStyles.buttonContent;
+    const { currentResult, answer } = this.props;
 
     return (
       <View style={styles.container}>
-        <AnswerDisplay answer={this.props.answer} />
+        <AnswerDisplay answer={answer} />
         <View style={styles.buttonContainer}>
           <AnswerButton
             text="Yes"
@@ -43,6 +44,9 @@ class Answer extends Component {
             onPress={() => {
               this.saveResult(true);
             }}
+            color={
+              currentResult === true ? colors.doveGray : colors.doveGrayShadow
+            }
           />
           <AnswerButton
             text="No"
@@ -50,6 +54,9 @@ class Answer extends Component {
             onPress={() => {
               this.saveResult(false);
             }}
+            color={
+              currentResult === false ? colors.doveGray : colors.doveGrayShadow
+            }
           />
         </View>
       </View>
@@ -76,7 +83,8 @@ const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
     cardId,
     quizId,
     deckTitle: navigation.getParam('deckTitle'),
-    answer: cardId ? cards[cardId].answer : null
+    answer: cardId ? cards[cardId].answer : null,
+    currentResult: quizzes[quizId].results[cardId]
   };
 };
 

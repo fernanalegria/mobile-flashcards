@@ -2,10 +2,15 @@ import React from 'react';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import baseStyles, { colors } from '../../../styles';
 
-const AnswerButton = ({ onPress, text, icon = null }) => (
+const AnswerButton = ({
+  onPress,
+  text,
+  color = colors.doveGrayShadow,
+  icon = null
+}) => (
   <TouchableHighlight
     onPress={onPress}
-    style={[styles.container, { backgroundColor: colors.doveGrayShadow }]}
+    style={[styles.container, { backgroundColor: color }]}
     underlayColor={colors.doveGray}
   >
     <View style={styles.btnContent}>
