@@ -37,6 +37,7 @@ class InputForm extends Component {
           text="Create"
           style={{ margin: 25 }}
           onPress={this.submit}
+          disabled={!title}
         />
       </Form>
     );
