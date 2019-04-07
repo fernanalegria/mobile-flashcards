@@ -1,9 +1,9 @@
 const MAIN_KEY = 'UdaciFlashcards';
 
-const generateKey = item => ({ [item]: `${MAIN_KEY}:${item}` });
+const generateKeys = items =>
+  items.reduce(
+    (accumulator, item) => ({ ...accumulator, [item]: `${MAIN_KEY}:${item}` }),
+    {}
+  );
 
-export const STORAGE_KEYS = {
-  ...generateKey('cards'),
-  ...generateKey('decks'),
-  ...generateKey('quizzes')
-};
+export const STORAGE_KEYS = generateKeys(['cards', 'decks', 'quizzes']);

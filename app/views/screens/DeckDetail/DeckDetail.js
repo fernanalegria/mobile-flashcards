@@ -62,9 +62,7 @@ class DeckDetail extends Component {
       <Fragment>
         {deck ? (
           <View style={styles.container}>
-            <Animated.View
-              style={[styles.detail, { transform: [{ scale }] }]}
-            >
+            <Animated.View style={[styles.detail, { transform: [{ scale }] }]}>
               <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.text}>{getNumberOfCards(deck.cards)}</Text>
             </Animated.View>
@@ -73,7 +71,11 @@ class DeckDetail extends Component {
                 text="Start Quiz"
                 icon={icons.StartIcon}
                 style={styles.button}
-                onPress={() => {}}
+                onPress={() => {
+                  navigation.navigate(ROUTES.QuizQuestion, {
+                    deckTitle: deck.title
+                  });
+                }}
               />
               <Button
                 text="Add Card"

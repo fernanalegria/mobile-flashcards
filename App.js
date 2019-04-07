@@ -6,7 +6,15 @@ import { colors } from './app/views/styles';
 import { PLATFORM } from './app/views/utils/constants';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import StatusBarWrapper from './app/views/common/StatusBarWrapper';
-import { DeckList, NewDeck, DeckDetail, NewCard } from './app/views/screens';
+import {
+  DeckList,
+  NewDeck,
+  DeckDetail,
+  NewCard,
+  QuizAnswer,
+  QuizQuestion,
+  QuizScore
+} from './app/views/screens';
 import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
@@ -67,13 +75,30 @@ const defaultNavigationOptions = {
   }
 };
 
+const noHeader = {
+  header: null
+};
+
+const Quiz = createStackNavigator({
+  QuizQuestion: {
+    screen: QuizQuestion,
+    navigationOptions: defaultNavigationOptions
+  },
+  QuizAnswer: {
+    screen: QuizAnswer,
+    navigationOptions: defaultNavigationOptions
+  },
+  QuizScore: {
+    screen: QuizScore,
+    navigationOptions: defaultNavigationOptions
+  }
+});
+
 const AppContainer = createAppContainer(
   createStackNavigator({
     Home: {
       screen: Tabs,
-      navigationOptions: {
-        header: null
-      }
+      navigationOptions: noHeader
     },
     DeckDetail: {
       screen: DeckDetail,
@@ -82,6 +107,10 @@ const AppContainer = createAppContainer(
     NewCard: {
       screen: NewCard,
       navigationOptions: defaultNavigationOptions
+    },
+    Quiz: {
+      screen: Quiz,
+      navigationOptions: noHeader
     }
   })
 );
