@@ -16,7 +16,10 @@ const DeckListItem = ({ deck, navigation }) => (
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate(ROUTES.DeckDetail, { id: deck.id, title: deck.title });
+          navigation.navigate(ROUTES.DeckDetail, {
+            id: deck.id,
+            title: deck.title
+          });
         }}
       >
         <View style={styles.deckCard}>
@@ -32,21 +35,11 @@ const DeckListItem = ({ deck, navigation }) => (
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: colors.white,
-    borderRadius: Platform.OS === PLATFORM.iOS ? 16 : 2,
+    ...baseStyles.card,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 9,
-    marginBottom: 9,
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: colors.blackShadow,
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    marginBottom: 9
   },
   title: {
     ...baseStyles.textCenter,

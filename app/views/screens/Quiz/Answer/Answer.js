@@ -76,7 +76,7 @@ const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
     cardId,
     quizId,
     deckTitle: navigation.getParam('deckTitle'),
-    answer: cards[cardId].answer
+    answer: cardId ? cards[cardId].answer : null
   };
 };
 

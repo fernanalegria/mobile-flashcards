@@ -1,5 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import * as colors from './colors';
+import { PLATFORM } from '../utils/constants';
 
 const textCenter = {
   textAlign: 'center'
@@ -41,5 +42,18 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.boulder,
     margin: 25
+  },
+  card: {
+    backgroundColor: colors.white,
+    borderRadius: Platform.OS === PLATFORM.iOS ? 16 : 2,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: colors.blackShadow,
+    shadowOffset: {
+      width: 0,
+      height: 3
+    }
   }
 });
