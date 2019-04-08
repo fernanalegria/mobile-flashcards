@@ -7,21 +7,30 @@ import AnswerDisplay from './AnswerDisplay';
 import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
 import { ROUTES } from '../../../utils/constants';
-import { getActiveCardId } from 'utils/helpers';
+import { getActiveCardId, setQuizTitle } from 'utils/helpers';
 import { QuizStep } from '../../../common';
 
 class Answer extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.getParam('deckTitle')} - Quiz`
-  });
+  static navigationOptions = setQuizTitle;
 
   saveResult = result => {
-    const { navigation, updateQuiz, quizId, cardId, deckTitle } = this.props;
+    const {
+      navigation,
+      updateQuiz,
+      quizId,
+      cardId,
+      deckTitle,
+      current,
+      total
+    } = this.props;
     updateQuiz(quizId, cardId, result).then(() => {
-      navigation.push(ROUTES.QuizNextQuestion, {
-        quizId,
-        deckTitle
-      });
+      navigation.push(
+        current === total ? ROUTES.QuizScore : ROUTES.QuizQuestion,
+        {
+          quizId,
+          deckTitle
+        }
+      );
     });
   };
 
@@ -98,7 +107,7 @@ const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
     quizId,
     deckTitle: navigation.getParam('deckTitle'),
     answer: cardId ? cards[cardId].answer : null,
-    currentResult: quizzes[quizId].results[cardId],
+    currentResult: cardId ? quizzes[quizId].results[cardId] : null,
     current: quiz.step + 1,
     total: cardIds.length
   };

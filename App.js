@@ -12,7 +12,8 @@ import {
   DeckDetail,
   NewCard,
   QuizAnswer,
-  QuizNextQuestion
+  QuizQuestion,
+  QuizScore
 } from './app/views/screens';
 import {
   createBottomTabNavigator,
@@ -95,12 +96,16 @@ const AppContainer = createAppContainer(
       screen: NewCard,
       navigationOptions: defaultNavigationOptions
     },
-    QuizNextQuestion: {
-      screen: QuizNextQuestion,
+    QuizQuestion: {
+      screen: QuizQuestion,
       navigationOptions: defaultNavigationOptions
     },
     QuizAnswer: {
       screen: QuizAnswer,
+      navigationOptions: defaultNavigationOptions
+    },
+    QuizScore: {
+      screen: QuizScore,
       navigationOptions: defaultNavigationOptions
     }
   })

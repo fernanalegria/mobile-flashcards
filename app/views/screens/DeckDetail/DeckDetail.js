@@ -70,7 +70,7 @@ class DeckDetail extends Component {
   startQuiz = () => {
     const { navigation, startQuiz, deck } = this.props;
     startQuiz(deck.id).then(quiz => {
-      navigation.navigate(ROUTES.QuizNextQuestion, {
+      navigation.navigate(ROUTES.QuizQuestion, {
         quizId: quiz.id,
         deckTitle: deck.title
       });
@@ -95,6 +95,7 @@ class DeckDetail extends Component {
                 icon={icons.StartIcon}
                 style={styles.button}
                 onPress={this.startQuiz}
+                disabled={deck.cards.length === 0}
               />
               <Button
                 text="Add Card"

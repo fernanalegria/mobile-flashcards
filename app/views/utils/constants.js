@@ -13,6 +13,7 @@ export const ROUTES = getRoutes([
   'DeckDetail',
   'NewCard',
   'Quiz',
-  'QuizNextQuestion',
-  'QuizAnswer'
+  'QuizQuestion',
+  'QuizAnswer',
+  'QuizScore'
 ]);
