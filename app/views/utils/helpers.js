@@ -23,7 +23,14 @@ export const setQuizTitle = ({ navigation }) => ({
       icon={HomeIcon}
       style={{ marginRight: 10 }}
       onPress={() => {
-        navigation.navigate(ROUTES.Home);
+        const unsetGoBack = navigation.getParam('unsetGoBack');
+        if (unsetGoBack) {
+          unsetGoBack(() => {
+            navigation.navigate(ROUTES.Home);
+          });
+        } else {
+          navigation.navigate(ROUTES.Home);
+        }
       }}
     />
   )
