@@ -44,12 +44,14 @@ class DeckDetail extends Component {
     scale: new Animated.Value(1)
   };
 
-  componentDidUpdate() {
-    const { scale } = this.state;
-    Animated.sequence([
-      Animated.timing(scale, { duration: 200, toValue: 1.2 }),
-      Animated.spring(scale, { toValue: 1, friction: 4 })
-    ]).start();
+  componentDidUpdate(prevProps) {
+    if (this.props.deck.cards.length > prevProps.deck.cards.length) {
+      const { scale } = this.state;
+      Animated.sequence([
+        Animated.timing(scale, { duration: 200, toValue: 1.2 }),
+        Animated.spring(scale, { toValue: 1, friction: 4 })
+      ]).start();
+    }
   }
 
   deleteDeck = () => {
