@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
 import { ROUTES } from '../../../utils/constants';
 import { getActiveCardId } from 'utils/helpers';
+import { QuizStep } from '../../../common';
 
 class Answer extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -26,38 +27,45 @@ class Answer extends Component {
 
   render() {
     const { fontSize, color } = baseStyles.buttonContent;
-    const { currentResult, answer } = this.props;
+    const { currentResult, answer, current, total } = this.props;
 
     return (
-      <View style={styles.container}>
-        <AnswerDisplay answer={answer} />
-        <View style={styles.buttonContainer}>
-          <AnswerButton
-            text="Yes"
-            icon={
-              <MaterialIcons
-                name="check-circle"
-                size={fontSize}
-                color={color}
-              />
-            }
-            onPress={() => {
-              this.saveResult(true);
-            }}
-            color={
-              currentResult === true ? colors.doveGray : colors.doveGrayShadow
-            }
-          />
-          <AnswerButton
-            text="No"
-            icon={<MaterialIcons name="cancel" size={fontSize} color={color} />}
-            onPress={() => {
-              this.saveResult(false);
-            }}
-            color={
-              currentResult === false ? colors.doveGray : colors.doveGrayShadow
-            }
-          />
+      <View style={{ flex: 1 }}>
+        {current <= total && <QuizStep current={current} total={total} />}
+        <View style={styles.container}>
+          <AnswerDisplay answer={answer} />
+          <View style={styles.buttonContainer}>
+            <AnswerButton
+              text="Yes"
+              icon={
+                <MaterialIcons
+                  name="check-circle"
+                  size={fontSize}
+                  color={color}
+                />
+              }
+              onPress={() => {
+                this.saveResult(true);
+              }}
+              color={
+                currentResult === true ? colors.doveGray : colors.doveGrayShadow
+              }
+            />
+            <AnswerButton
+              text="No"
+              icon={
+                <MaterialIcons name="cancel" size={fontSize} color={color} />
+              }
+              onPress={() => {
+                this.saveResult(false);
+              }}
+              color={
+                currentResult === false
+                  ? colors.doveGray
+                  : colors.doveGrayShadow
+              }
+            />
+          </View>
         </View>
       </View>
     );
@@ -77,14 +85,22 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ quizzes, decks, cards }, { navigation }) => {
   const quizId = navigation.getParam('quizId');
-  const cardId = getActiveCardId(quizzes, decks, cards, quizId);
+  const { cardId, cardIds, quiz } = getActiveCardId(
+    quizzes,
+    decks,
+    cards,
+    quizId,
+    true
+  );
 
   return {
     cardId,
     quizId,
     deckTitle: navigation.getParam('deckTitle'),
     answer: cardId ? cards[cardId].answer : null,
-    currentResult: quizzes[quizId].results[cardId]
+    currentResult: quizzes[quizId].results[cardId],
+    current: quiz.step + 1,
+    total: cardIds.length
   };
 };
 

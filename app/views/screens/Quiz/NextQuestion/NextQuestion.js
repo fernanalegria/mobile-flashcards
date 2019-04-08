@@ -35,7 +35,9 @@ class NextQuestion extends Component {
     const { decreaseStep, quizId } = this.props;
 
     if (this.state.goBack) {
-      decreaseStep(quizId);
+      setTimeout(() => {
+        decreaseStep(quizId);
+      }, 50);
     } else {
       this.setState({
         goBack: true
@@ -49,7 +51,7 @@ class NextQuestion extends Component {
     return (
       <Fragment>
         <NavigationEvents onWillBlur={this.onWillBlur} />
-        {isQuestion ? (
+        {isQuestion ? ( 
           <Question
             question={question}
             current={current}
