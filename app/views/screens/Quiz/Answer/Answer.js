@@ -7,7 +7,8 @@ import AnswerDisplay from './AnswerDisplay';
 import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
 import { ROUTES } from '../../../utils/constants';
-import { getActiveCardId, setQuizTitle } from 'utils/helpers';
+import { getActiveCardId } from 'utils/helpers';
+import { setQuizTitle } from '../../../utils/helpers';
 import { QuizStep } from '../../../common';
 
 class Answer extends Component {

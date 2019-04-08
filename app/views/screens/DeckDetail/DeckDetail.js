@@ -7,7 +7,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { PLATFORM, ROUTES } from '../../utils/constants';
 import { deckActions } from 'state/decks';
 import { quizActions } from 'state/quizzes';
-import { getNumberOfCards } from 'utils/helpers';
+import { getNumberOfCards } from '../../utils/helpers';
 
 const { fontSize, color } = baseStyles.buttonContent;
 

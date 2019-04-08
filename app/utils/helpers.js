@@ -7,9 +7,6 @@ export const isEmptyObject = obj => {
   return true;
 };
 
-export const getNumberOfCards = cards =>
-  `${cards.length} ${cards.length === 1 ? 'card' : 'cards'}`;
-
 export const getActiveCardId = (
   quizzes,
   decks,
@@ -30,7 +27,3 @@ export const getActiveCardId = (
       }
     : cardId;
 };
-
-export const setQuizTitle = ({ navigation }) => ({
-  title: `${navigation.getParam('deckTitle')} - Quiz`
-});
