@@ -3,12 +3,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  Platform
+  StyleSheet
 } from 'react-native';
 import baseStyles, { colors } from '../../styles';
-import { PLATFORM, ROUTES } from '../../utils/constants';
-import { getNumberOfCards } from 'utils/helpers';
+import { ROUTES } from '../../utils/constants';
+import { getNumberOfCards } from '../../utils/helpers';
 
 const DeckListItem = ({ deck, navigation }) => (
   <View style={styles.item}>

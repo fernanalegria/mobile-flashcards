@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
 import { NavigationEvents } from 'react-navigation';
 import baseStyles, { colors } from '../../../styles';
-import { setQuizTitle } from 'utils/helpers';
+import { setQuizTitle } from '../../../utils/helpers';
 
 class Score extends Component {
   static navigationOptions = setQuizTitle;
