@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
 import { NavigationEvents } from 'react-navigation';
 import baseStyles, { colors } from '../../../styles';
 import { setQuizTitle } from '../../../utils/helpers';
+import { PLATFORM } from '../../../utils/constants';
 
 class Score extends Component {
   static navigationOptions = setQuizTitle;
@@ -49,6 +50,8 @@ class Score extends Component {
   }
 }
 
+const borderRadius = Platform.OS === PLATFORM.iOS ? 16 : 2;
+
 const styles = StyleSheet.create({
   container: {
     ...baseStyles.center,
@@ -59,6 +62,8 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: colors.blueWood,
     color: colors.white,
+    borderTopLeftRadius: borderRadius,
+    borderTopRightRadius: borderRadius,
     ...baseStyles.textCenter
   },
   score: {
