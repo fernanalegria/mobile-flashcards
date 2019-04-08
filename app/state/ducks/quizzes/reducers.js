@@ -21,7 +21,10 @@ export default createReducer({})({
     ...state,
     [action.id]: {
       ...state[action.id],
-      step: state[action.id].step - 1
+      step:
+        state[action.id].step > 0
+          ? state[action.id].step - 1
+          : state[action.id].step
     }
   })
 });

@@ -30,3 +30,7 @@ export const getActiveCardId = (
       }
     : cardId;
 };
+
+export const setQuizTitle = ({ navigation }) => ({
+  title: `${navigation.getParam('deckTitle')} - Quiz`
+});
