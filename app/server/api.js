@@ -1,6 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import { STORAGE_KEYS } from 'utils/constants';
 import { isEmptyObject } from 'utils/helpers';
+import { Notifications, Permissions } from 'expo';
+import { getMidnight } from 'utils/helpers';
 
 const generateId = obj =>
   obj && !isEmptyObject(obj) ? Math.max(...Object.keys(obj)) + 1 : 1;
@@ -107,3 +109,50 @@ export const saveQuizResult = (id, cardId, result) =>
   });
 
 export const fetchQuizzes = () => fetchItems(STORAGE_KEYS.quizzes);
+
+export const clearLocalNotifications = () =>
+  AsyncStorage.removeItem(STORAGE_KEYS.notifications).then(
+    Notifications.cancelAllScheduledNotificationsAsync
+  );
+
+const createNotification = () => ({
+  title: 'Keep on the good work!',
+  body: "📖 Study daily and you'll achieve all your goals!",
+  ios: {
+    sound: true
+  },
+  android: {
+    sticky: false
+  }
+});
+
+const setNotification = () => {
+  Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
+    if (status === 'granted') {
+      const time = new Date();
+      time.setMinutes(time.getMinutes() + 1);
+      const options = { time };
+      Notifications.scheduleLocalNotificationAsync(
+        createNotification(),
+        options
+      );
+
+      AsyncStorage.setItem(STORAGE_KEYS.notifications, JSON.stringify(options));
+    }
+  });
+};
+
+export const setLocalNotification = () => {
+  AsyncStorage.getItem(STORAGE_KEYS.notifications)
+    .then(JSON.parse)
+    .then(data => {
+      if (data) {
+        const notificationTime = data.time;
+        if (notificationTime < getMidnight()) {
+          clearLocalNotifications().then(setNotification);
+        }
+      } else {
+        setNotification();
+      }
+    });
+};

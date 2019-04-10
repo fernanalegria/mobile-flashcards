@@ -3,8 +3,11 @@ import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { deckActions } from 'state/decks';
 import { cardActions } from 'state/cards';
+import { quizActions } from 'state/quizzes';
 import baseStyles, { colors } from '../../styles';
 import DeckListItem from './DeckListItem';
+import { setLocalNotification } from 'server/api';
+import { getMidnight } from 'utils/helpers';
 
 class DeckList extends Component {
   state = {
@@ -12,12 +15,22 @@ class DeckList extends Component {
   };
 
   componentDidMount() {
-    const { getDecks, getCards } = this.props;
-    Promise.all([getDecks(), getCards()]).then(() => {
-      this.setState({
-        isLoading: false
-      });
-    });
+    const { getDecks, getCards, getQuizzes } = this.props;
+    Promise.all([getDecks(), getCards(), getQuizzes()]).then(
+      ([, , quizzes]) => {
+        const midnight = getMidnight();
+        const todayQuizzes = Object.keys(quizzes).filter(
+          id => quizzes[id].createdDate > midnight
+        );
+        if (todayQuizzes.length === 0) {
+          setLocalNotification();
+        }
+
+        this.setState({
+          isLoading: false
+        });
+      }
+    );
   }
 
   renderItem = ({ item }) => (
@@ -61,7 +74,8 @@ const mapStateToProps = ({ decks }) => ({
 
 const mapDispatchToProps = {
   getDecks: () => deckActions.handleReceiveDecks(),
-  getCards: () => cardActions.handleReceiveCards()
+  getCards: () => cardActions.handleReceiveCards(),
+  getQuizzes: () => quizActions.handleReceiveQuizzes()
 };
 
 export default connect(

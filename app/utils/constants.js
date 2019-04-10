@@ -6,4 +6,9 @@ const generateKeys = items =>
     {}
   );
 
-export const STORAGE_KEYS = generateKeys(['cards', 'decks', 'quizzes']);
+export const STORAGE_KEYS = generateKeys([
+  'cards',
+  'decks',
+  'quizzes',
+  'notifications'
+]);
