@@ -9,7 +9,12 @@ import { ROUTES } from '../../utils/constants';
 class NewDeck extends Component {
   createNewDeck = title => {
     const { createDeck, navigation } = this.props;
-    return createDeck(title).then(() => navigation.navigate(ROUTES.DeckList));
+    return createDeck(title).then(deck =>
+      navigation.navigate(ROUTES.DeckDetail, {
+        id: deck.id,
+        title: deck.title
+      })
+    );
   };
 
   render() {
