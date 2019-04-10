@@ -1,4 +1,4 @@
-import { saveQuiz, saveQuizResult } from 'server/api';
+import { saveQuiz, saveQuizResult, fetchQuizzes } from 'server/api';
 import * as types from './types';
 
 const startQuiz = quiz => ({
@@ -27,3 +27,14 @@ export const returnQuiz = id => ({
   type: types.RETURN_QUIZ,
   id
 });
+
+const receiveQuizzes = quizzes => ({
+  type: types.RECEIVE_QUIZZES,
+  quizzes
+});
+
+export const handleReceiveQuizzes = () => dispatch =>
+  fetchQuizzes().then(quizzes => {
+    dispatch(receiveQuizzes(quizzes));
+    return Promise.resolve(quizzes);
+  });

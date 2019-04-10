@@ -26,5 +26,9 @@ export default createReducer({})({
           ? state[action.id].step - 1
           : state[action.id].step
     }
+  }),
+  [types.RECEIVE_QUIZZES]: (state, action) => ({
+    ...state,
+    ...action.quizzes
   })
 });

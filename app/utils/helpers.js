@@ -27,3 +27,9 @@ export const getActiveCardId = (
       }
     : cardId;
 };
+
+export const getMidnight = () => {
+  const midnight = new Date();
+  midnight.setHours(0, 0, 0, 0);
+  return midnight;
+};

@@ -8,6 +8,7 @@ import { PLATFORM, ROUTES } from '../../utils/constants';
 import { deckActions } from 'state/decks';
 import { quizActions } from 'state/quizzes';
 import { getNumberOfCards } from '../../utils/helpers';
+import { clearLocalNotifications } from 'server/api';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -72,6 +73,7 @@ class DeckDetail extends Component {
   startQuiz = () => {
     const { navigation, startQuiz, deck } = this.props;
     startQuiz(deck.id).then(quiz => {
+      clearLocalNotifications();
       navigation.navigate(ROUTES.QuizQuestion, {
         quizId: quiz.id,
         deckTitle: deck.title
