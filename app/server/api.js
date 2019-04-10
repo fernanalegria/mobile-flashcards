@@ -21,7 +21,7 @@ const mergeDecks = (title, decks) => {
         id,
         title,
         cards: [],
-        createdDate: (new Date()).toISOString()
+        createdDate: new Date().toISOString()
       }
     }
   };
@@ -37,7 +37,7 @@ const mergeCards = (question, answer, cards) => {
         id,
         question,
         answer,
-        createdDate: (new Date()).toISOString()
+        createdDate: new Date().toISOString()
       }
     }
   };
@@ -53,7 +53,7 @@ const mergeQuizzes = (deck, quizzes) => {
         id,
         deck,
         results: {},
-        startDate: (new Date()).toISOString()
+        startDate: new Date().toISOString()
       }
     }
   };
@@ -105,3 +105,5 @@ export const saveQuizResult = (id, cardId, result) =>
     quizzes[id].results[cardId] = result;
     return setItem(STORAGE_KEYS.quizzes, quizzes, id);
   });
+
+export const fetchQuizzes = () => fetchItems(STORAGE_KEYS.quizzes);
