@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import baseStyles from '../styles';
 
-const Form = ({ children }) => <View style={styles.form}>{children}</View>;
+const Form = ({ children }) => (
+  <View style={baseStyles.center}>
+    <View style={styles.form}>{children}</View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   form: {
-    paddingLeft: 50,
-    paddingRight: 50,
-    justifyContent: 'center',
-    alignItems: 'stretch'
+    width: 280,
+    ...baseStyles.stretch
   }
 });
 

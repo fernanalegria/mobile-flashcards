@@ -46,7 +46,7 @@ class DeckDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.deck.cards.length > prevProps.deck.cards.length) {
+    if (this.props.deck && this.props.deck.cards.length > prevProps.deck.cards.length) {
       const { scale } = this.state;
       Animated.sequence([
         Animated.timing(scale, { duration: 200, toValue: 1.2 }),
@@ -88,8 +88,8 @@ class DeckDetail extends Component {
     return (
       <Fragment>
         {deck ? (
-          <View style={styles.container}>
-            <Animated.View style={[styles.detail, { transform: [{ scale }] }]}>
+          <View style={baseStyles.screenContainer}>
+            <Animated.View style={[baseStyles.center, { transform: [{ scale }] }]}>
               <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.text}>{getNumberOfCards(deck.cards)}</Text>
             </Animated.View>
@@ -116,7 +116,7 @@ class DeckDetail extends Component {
             </Form>
           </View>
         ) : (
-          <View style={baseStyles.center}>
+          <View style={styles.center}>
             <Text style={styles.text}>No data found</Text>
           </View>
         )}
@@ -140,14 +140,9 @@ const styles = StyleSheet.create({
     marginRight: 25,
     marginLeft: 25
   },
-  detail: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  container: {
+  center: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'stretch'
+    ...baseStyles.center
   }
 });
 

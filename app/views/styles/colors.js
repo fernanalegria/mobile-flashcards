@@ -14,3 +14,4 @@ export const mercury = '#e4e4e4';
 export const doveGrayShadow = 'rgba(108, 108, 108, 0.4)';
 export const doveGray = '#6c6c6c';
 export const oceanGreen = '#42b983';
+export const transparent = 'transparent';

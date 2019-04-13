@@ -4,7 +4,7 @@ import baseStyles, { colors } from '../../../styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const AnswerDisplay = ({ answer }) => (
-  <View style={baseStyles.center}>
+  <View style={styles.center}>
     <Text style={styles.text}>The answer is:</Text>
     <Text style={styles.answer}>
       <MaterialCommunityIcons
@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 5,
     maxWidth: 300
+  },
+  center: {
+    flex: 1,
+    ...baseStyles.center
   }
 });
 

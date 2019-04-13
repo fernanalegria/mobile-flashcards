@@ -25,8 +25,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     height: 45,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...baseStyles.center,
     borderRadius: 7
   },
   text: {
