@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "UdaciFlashcards",
+    "description": "UdaciFlashcards lets you create custom decks of cards that you can then use to check your knowledge anytime you need",
+    "slug": "mobile-flashcards",
+    "privacy": "public",
+    "sdkVersion": "32.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/mobile-flashcards-256.png",
+    "notification": {
+      "icon": "./assets/mobile-flashcards-48.png"
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "org.udaciflashcards.exp"
+    },
+    "android": {
+      "package": "org.udaciflashcards.exp"
+    }
+  }
+}
