@@ -46,7 +46,7 @@ class DeckDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.deck.cards.length > prevProps.deck.cards.length) {
+    if (this.props.deck && this.props.deck.cards.length > prevProps.deck.cards.length) {
       const { scale } = this.state;
       Animated.sequence([
         Animated.timing(scale, { duration: 200, toValue: 1.2 }),
