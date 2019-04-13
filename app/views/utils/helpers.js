@@ -26,10 +26,10 @@ export const setQuizTitle = ({ navigation }) => ({
         const unsetGoBack = navigation.getParam('unsetGoBack');
         if (unsetGoBack) {
           unsetGoBack(() => {
-            navigation.navigate(ROUTES.Home);
+            navigation.navigate(ROUTES.DeckList);
           });
         } else {
-          navigation.navigate(ROUTES.Home);
+          navigation.navigate(ROUTES.DeckList);
         }
       }}
     />
