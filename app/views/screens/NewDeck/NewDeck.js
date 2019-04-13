@@ -12,6 +12,10 @@ class NewDeck extends Component {
     createDeck: func.isRequired
   };
 
+  /**
+   * Calls Redux to create a new deck and navigates to its detail
+   * @param  {string} title
+   */
   createNewDeck = title => {
     const { createDeck, navigation } = this.props;
     return createDeck(title).then(deck =>

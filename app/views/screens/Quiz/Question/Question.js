@@ -26,6 +26,9 @@ class Question extends Component {
     goBack: true
   };
 
+  /**
+   * Flips the card to show the answer
+   */
   showAnswer = () => {
     const { navigation, quizId } = this.props;
     this.setState(
@@ -41,6 +44,9 @@ class Question extends Component {
     );
   };
 
+  /**
+   * Updates the step if the user goes back to the previous card
+   */
   onWillBlur = () => {
     const { decreaseStep, quizId } = this.props;
 

@@ -41,6 +41,11 @@ class DeckList extends Component {
     );
   }
 
+  /**
+   * Renders each item of the lis
+   * passed to React Native's FlatList component
+   * @param  {Object} item
+   */
   renderItem = ({ item }) => (
     <DeckListItem deck={item} navigation={this.props.navigation} />
   );

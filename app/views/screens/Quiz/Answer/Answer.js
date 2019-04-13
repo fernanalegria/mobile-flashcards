@@ -26,6 +26,10 @@ class Answer extends Component {
 
   static navigationOptions = setQuizTitle;
 
+  /**
+   * Calls Redux to save the guess and moves on through the quiz
+   * @param  {boolean} result
+   */
   saveResult = result => {
     const {
       navigation,

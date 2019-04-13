@@ -3,6 +3,9 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import baseStyles, { colors } from '../styles';
 import { func, string, object, bool } from 'prop-types';
 
+/**
+ * Reusable button with text and icon
+ */
 const Button = ({
   onPress,
   text = null,

@@ -13,6 +13,9 @@ class InputForm extends Component {
     title: ''
   };
 
+  /**
+   * Sends the input to the parent component and resets the state
+   */
   submit = () => {
     this.props.writeText(this.state.title).then(() => {
       this.setState({
@@ -21,6 +24,10 @@ class InputForm extends Component {
     });
   };
 
+  /**
+   * Updates the title state according to the user input
+   * @param  {string} title
+   */
   onTitleChange = title => {
     this.setState({
       title

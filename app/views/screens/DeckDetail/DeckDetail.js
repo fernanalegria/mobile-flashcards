@@ -9,7 +9,7 @@ import { deckActions, deckShape } from 'state/decks';
 import { quizActions } from 'state/quizzes';
 import { getNumberOfCards } from '../../utils/helpers';
 import { clearLocalNotifications } from 'server/api';
-import { func,  } from 'prop-types';
+import { func } from 'prop-types';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -65,6 +65,9 @@ class DeckDetail extends Component {
     }
   }
 
+  /**
+   * Calls Redux to delete a deck and navigates back to the list of decks
+   */
   deleteDeck = () => {
     const { deck, deleteDeck, navigation } = this.props;
     deleteDeck(deck.id).then(() => {
@@ -72,6 +75,9 @@ class DeckDetail extends Component {
     });
   };
 
+  /**
+   * Navigates to the add card screen
+   */
   addCard = () => {
     const { deck, navigation } = this.props;
     navigation.navigate(ROUTES.NewCard, {
@@ -80,6 +86,9 @@ class DeckDetail extends Component {
     });
   };
 
+  /**
+   * Calls Redux to start a new quiz and navigates to its first screen
+   */
   startQuiz = () => {
     const { navigation, startQuiz, deck } = this.props;
     startQuiz(deck.id).then(quiz => {

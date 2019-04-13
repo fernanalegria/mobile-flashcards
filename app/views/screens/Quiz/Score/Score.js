@@ -49,10 +49,17 @@ class Score extends Component {
     this.props.navigation.setParams({ unsetGoBack: this.unsetGoBack });
   }
 
+  /**
+   * Allows navigationOptions to access the state
+   * @param  {Function} callback
+   */
   unsetGoBack = callback => {
     this.setState({ goBack: false }, callback);
   };
 
+  /**
+   * Updates the step if the user goes back to the previous card
+   */
   onWillBlur = () => {
     const { decreaseStep, quizId } = this.props;
 
@@ -67,6 +74,9 @@ class Score extends Component {
     }
   };
 
+  /**
+   * Navigates back to the deck detail
+   */
   backToDeck = () => {
     const { navigation, deck } = this.props;
     this.setState({ goBack: false }, () => {
@@ -77,6 +87,9 @@ class Score extends Component {
     });
   };
 
+  /**
+   * Calls Redux to start a new quiz and goes back to the first screen
+   */
   restartQuiz = () => {
     const { navigation, startQuiz, deck } = this.props;
     this.setState({ goBack: false }, () => {
