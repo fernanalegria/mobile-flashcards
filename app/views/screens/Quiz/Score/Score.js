@@ -88,7 +88,9 @@ class Score extends Component {
         <NavigationEvents onWillBlur={this.onWillBlur} />
         <View style={styles.cardContainer}>
           <View style={baseStyles.card}>
-            <Text style={styles.header}>Your score</Text>
+            <View style={styles.header}>
+              <Text style={styles.textHeader}>Your score</Text>
+            </View>
             <View style={styles.scoreContainer}>
               <Text style={styles.score}>
                 {Math.round((correct * 100) / total)}%
@@ -128,12 +130,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.athensGray
   },
   header: {
-    fontSize: 25,
     padding: 20,
     backgroundColor: colors.blueWood,
-    color: colors.white,
     borderTopLeftRadius: borderRadius,
     borderTopRightRadius: borderRadius,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  textHeader: {
+    fontSize: 25,
+    color: colors.white,
     ...baseStyles.textCenter
   },
   score: {

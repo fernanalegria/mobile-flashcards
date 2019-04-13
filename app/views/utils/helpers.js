@@ -21,7 +21,7 @@ export const setQuizTitle = ({ navigation }) => ({
   headerRight: (
     <Button
       icon={HomeIcon}
-      style={{ marginRight: 10 }}
+      style={{ marginRight: 10, backgroundColor: colors.transparent }}
       onPress={() => {
         const unsetGoBack = navigation.getParam('unsetGoBack');
         if (unsetGoBack) {

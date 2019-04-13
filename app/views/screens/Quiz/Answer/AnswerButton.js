@@ -37,7 +37,8 @@ export const styles = StyleSheet.create({
   },
   btnContent: {
     flexDirection: 'row',
-    ...baseStyles.center,
+    justifyContent: 'center',
+    alignItems: 'center',
     ...padding
   },
   text: {

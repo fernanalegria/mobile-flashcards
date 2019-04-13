@@ -43,7 +43,7 @@ class Answer extends Component {
       <View style={{ flex: 1 }}>
         {current <= total && <QuizStep current={current} total={total} />}
         <View style={styles.container}>
-          <AnswerDisplay answer={answer} />
+          <AnswerDisplay answer={answer ? answer : ''} />
           <View style={styles.buttonContainer}>
             <AnswerButton
               text="Yes"
