@@ -4,8 +4,13 @@ import { Form, Button } from '../../common';
 import baseStyles from '../../styles';
 import { cardActions } from 'state/cards';
 import { connect } from 'react-redux';
+import { func } from 'prop-types';
 
 class NewCard extends Component {
+  static propTypes = {
+    addCardToDeck: func.isRequired
+  };
+
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam('deckTitle')} - Add Card`
   });

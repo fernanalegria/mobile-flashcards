@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { TextInput } from 'react-native';
 import { Button, Form } from '../../common';
 import baseStyles from '../../styles';
+import { func } from 'prop-types';
 
 class InputForm extends Component {
+  static propTypes = {
+    writeText: func.isRequired
+  };
+
   state = {
     title: ''
   };

@@ -5,8 +5,13 @@ import { connect } from 'react-redux';
 import { deckActions } from 'state/decks';
 import InputForm from './InputForm';
 import { ROUTES } from '../../utils/constants';
+import { func } from 'prop-types';
 
 class NewDeck extends Component {
+  static propTypes = {
+    createDeck: func.isRequired
+  };
+
   createNewDeck = title => {
     const { createDeck, navigation } = this.props;
     return createDeck(title).then(deck =>

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
+import { deckShape } from 'state/decks';
 import { NavigationEvents } from 'react-navigation';
 import baseStyles, { colors } from '../../../styles';
 import { setQuizTitle } from '../../../utils/helpers';
 import { PLATFORM, ROUTES } from '../../../utils/constants';
 import { Ionicons, Foundation, MaterialIcons } from '@expo/vector-icons';
 import { Form, Button } from '../../../common';
+import { func, number } from 'prop-types';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -29,6 +31,14 @@ const icons = {
 };
 
 class Score extends Component {
+  static propTypes = {
+    decreaseStep: func.isRequired,
+    startQuiz: func.isRequired,
+    quizId: number.isRequired,
+    deck: deckShape.isRequired,
+    correct: number.isRequired
+  };
+
   static navigationOptions = setQuizTitle;
 
   state = {

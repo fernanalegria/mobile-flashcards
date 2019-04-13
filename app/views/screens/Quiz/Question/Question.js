@@ -9,8 +9,17 @@ import { NavigationEvents } from 'react-navigation';
 import { QuizStep, Form, Button } from '../../../common';
 import baseStyles from '../../../styles';
 import { Ionicons } from '@expo/vector-icons';
+import { func, number, string } from 'prop-types';
 
 class Question extends Component {
+  static propTypes = {
+    decreaseStep: func.isRequired,
+    quizId: number.isRequired,
+    question: string,
+    current: number.isRequired,
+    total: number.isRequired
+  };
+
   static navigationOptions = setQuizTitle;
 
   state = {

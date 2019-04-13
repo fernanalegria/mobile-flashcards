@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import baseStyles, { colors } from '../../../styles';
+import { func, string, object } from 'prop-types';
 
 const AnswerButton = ({
   onPress,
@@ -20,12 +21,19 @@ const AnswerButton = ({
   </TouchableHighlight>
 );
 
+AnswerButton.propTypes = {
+  onPress: func.isRequired,
+  text: string.isRequired,
+  color: string,
+  icon: object
+};
+
 const padding = {
   paddingTop: 15,
   paddingBottom: 15
 };
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,

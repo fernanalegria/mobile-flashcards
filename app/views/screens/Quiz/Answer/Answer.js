@@ -10,8 +10,20 @@ import { ROUTES } from '../../../utils/constants';
 import { getActiveCardId } from 'utils/helpers';
 import { setQuizTitle } from '../../../utils/helpers';
 import { QuizStep } from '../../../common';
+import { func, number, string, bool } from 'prop-types';
 
 class Answer extends Component {
+  static propTypes = {
+    updateQuiz: func.isRequired,
+    quizId: number.isRequired,
+    cardId: number,
+    deckTitle: string.isRequired,
+    current: number.isRequired,
+    total: number.isRequired,
+    currentResult: bool,
+    answer: string
+  };
+
   static navigationOptions = setQuizTitle;
 
   saveResult = result => {

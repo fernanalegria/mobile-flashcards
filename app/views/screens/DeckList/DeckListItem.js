@@ -8,6 +8,7 @@ import {
 import baseStyles, { colors } from '../../styles';
 import { ROUTES } from '../../utils/constants';
 import { getNumberOfCards } from '../../utils/helpers';
+import { deckShape } from 'state/decks';
 
 const DeckListItem = ({ deck, navigation }) => (
   <View style={styles.item}>
@@ -31,6 +32,10 @@ const DeckListItem = ({ deck, navigation }) => (
     )}
   </View>
 );
+
+DeckListItem.propTypes = {
+  deck: deckShape
+};
 
 const styles = StyleSheet.create({
   item: {

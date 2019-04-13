@@ -1,11 +1,17 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import { Constants } from 'expo';
+import { colors } from '../styles';
+import { string } from 'prop-types';
 
-const StatusBarWrapper = ({ backgroundColor, ...props }) => (
+const StatusBarWrapper = ({ backgroundColor = colors.black, ...props }) => (
   <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
   </View>
 );
+
+StatusBarWrapper.propTypes = {
+  backgroundColor: string
+};
 
 export default StatusBarWrapper;

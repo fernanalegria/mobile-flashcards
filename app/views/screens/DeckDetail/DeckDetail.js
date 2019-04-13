@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { Form, Button } from '../../common';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { PLATFORM, ROUTES } from '../../utils/constants';
-import { deckActions } from 'state/decks';
+import { deckActions, deckShape } from 'state/decks';
 import { quizActions } from 'state/quizzes';
 import { getNumberOfCards } from '../../utils/helpers';
 import { clearLocalNotifications } from 'server/api';
+import { func,  } from 'prop-types';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -37,6 +38,12 @@ const icons = {
 };
 
 class DeckDetail extends Component {
+  static propTypes = {
+    deck: deckShape,
+    deleteDeck: func.isRequired,
+    startQuiz: func.isRequired
+  };
+
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title')
   });
@@ -46,7 +53,10 @@ class DeckDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.deck && this.props.deck.cards.length > prevProps.deck.cards.length) {
+    if (
+      this.props.deck &&
+      this.props.deck.cards.length > prevProps.deck.cards.length
+    ) {
       const { scale } = this.state;
       Animated.sequence([
         Animated.timing(scale, { duration: 200, toValue: 1.2 }),
@@ -89,7 +99,9 @@ class DeckDetail extends Component {
       <Fragment>
         {deck ? (
           <View style={baseStyles.screenContainer}>
-            <Animated.View style={[baseStyles.center, { transform: [{ scale }] }]}>
+            <Animated.View
+              style={[baseStyles.center, { transform: [{ scale }] }]}
+            >
               <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.text}>{getNumberOfCards(deck.cards)}</Text>
             </Animated.View>
