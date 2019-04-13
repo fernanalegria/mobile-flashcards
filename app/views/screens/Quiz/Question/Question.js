@@ -9,14 +9,26 @@ import { NavigationEvents } from 'react-navigation';
 import { QuizStep, Form, Button } from '../../../common';
 import baseStyles from '../../../styles';
 import { Ionicons } from '@expo/vector-icons';
+import { func, number, string } from 'prop-types';
 
 class Question extends Component {
+  static propTypes = {
+    decreaseStep: func.isRequired,
+    quizId: number.isRequired,
+    question: string,
+    current: number.isRequired,
+    total: number.isRequired
+  };
+
   static navigationOptions = setQuizTitle;
 
   state = {
     goBack: true
   };
 
+  /**
+   * Flips the card to show the answer
+   */
   showAnswer = () => {
     const { navigation, quizId } = this.props;
     this.setState(
@@ -32,6 +44,9 @@ class Question extends Component {
     );
   };
 
+  /**
+   * Updates the step if the user goes back to the previous card
+   */
   onWillBlur = () => {
     const { decreaseStep, quizId } = this.props;
 

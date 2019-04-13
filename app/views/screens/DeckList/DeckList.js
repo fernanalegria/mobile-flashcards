@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { deckActions } from 'state/decks';
+import { deckActions, deckShape } from 'state/decks';
 import { cardActions } from 'state/cards';
 import { quizActions } from 'state/quizzes';
 import baseStyles, { colors } from '../../styles';
 import DeckListItem from './DeckListItem';
 import { setLocalNotification } from 'server/api';
 import { getMidnight } from 'utils/helpers';
+import { func, arrayOf } from 'prop-types';
 
 class DeckList extends Component {
+  static propTypes = {
+    getDecks: func.isRequired,
+    getCards: func.isRequired,
+    getQuizzes: func.isRequired,
+    decks: arrayOf(deckShape).isRequired
+  };
+
   state = {
     isLoading: true
   };
@@ -33,6 +41,11 @@ class DeckList extends Component {
     );
   }
 
+  /**
+   * Renders each item of the lis
+   * passed to React Native's FlatList component
+   * @param  {Object} item
+   */
   renderItem = ({ item }) => (
     <DeckListItem deck={item} navigation={this.props.navigation} />
   );

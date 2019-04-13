@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { TextInput } from 'react-native';
 import { Button, Form } from '../../common';
 import baseStyles from '../../styles';
+import { func } from 'prop-types';
 
 class InputForm extends Component {
+  static propTypes = {
+    writeText: func.isRequired
+  };
+
   state = {
     title: ''
   };
 
+  /**
+   * Sends the input to the parent component and resets the state
+   */
   submit = () => {
     this.props.writeText(this.state.title).then(() => {
       this.setState({
@@ -16,6 +24,10 @@ class InputForm extends Component {
     });
   };
 
+  /**
+   * Updates the title state according to the user input
+   * @param  {string} title
+   */
   onTitleChange = title => {
     this.setState({
       title

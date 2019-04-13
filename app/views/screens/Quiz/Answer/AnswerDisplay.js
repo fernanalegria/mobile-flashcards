@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import baseStyles, { colors } from '../../../styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { string } from 'prop-types';
 
 const AnswerDisplay = ({ answer }) => (
   <View style={styles.center}>
@@ -22,6 +23,10 @@ const AnswerDisplay = ({ answer }) => (
     <Text style={styles.text}>Did you guess it right?</Text>
   </View>
 );
+
+AnswerDisplay.propTypes = {
+  answer: string.isRequired
+};
 
 const styles = StyleSheet.create({
   text: {

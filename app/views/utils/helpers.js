@@ -16,6 +16,11 @@ const HomeIcon = (
   />
 );
 
+/**
+ * Defines general navigation options for the quiz screens
+ * @param  {Object} navigation
+ * @returns  {Object} navigationOptions
+ */
 export const setQuizTitle = ({ navigation }) => ({
   title: `${navigation.getParam('deckTitle')} - Quiz`,
   headerRight: (
@@ -36,5 +41,10 @@ export const setQuizTitle = ({ navigation }) => ({
   )
 });
 
+/**
+ * Returns either card or cards depending on the number
+ * @param  {Array} cards
+ * @returns  {string}
+ */
 export const getNumberOfCards = cards =>
   `${cards.length} ${cards.length === 1 ? 'card' : 'cards'}`;

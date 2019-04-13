@@ -4,8 +4,13 @@ import { Form, Button } from '../../common';
 import baseStyles from '../../styles';
 import { cardActions } from 'state/cards';
 import { connect } from 'react-redux';
+import { func } from 'prop-types';
 
 class NewCard extends Component {
+  static propTypes = {
+    addCardToDeck: func.isRequired
+  };
+
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam('deckTitle')} - Add Card`
   });
@@ -15,18 +20,30 @@ class NewCard extends Component {
     answer: ''
   };
 
+  /**
+   * Updates the question state according to the user input
+   * @param  {string} question
+   */
   onQuestionChange = question => {
     this.setState({
       question
     });
   };
 
+  /**
+   * Updates the answer state according to the user input
+   * @param  {string} answer
+   */
   onAnswerChange = answer => {
     this.setState({
       answer
     });
   };
 
+  /**
+   * Calls Redux to create a new card
+   * and navigates back to the deck detail
+   */
   submit = () => {
     const { question, answer } = this.state;
     const { navigation, addCardToDeck } = this.props;

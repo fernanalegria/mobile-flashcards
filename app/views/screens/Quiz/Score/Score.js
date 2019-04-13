@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { quizActions } from 'state/quizzes';
+import { deckShape } from 'state/decks';
 import { NavigationEvents } from 'react-navigation';
 import baseStyles, { colors } from '../../../styles';
 import { setQuizTitle } from '../../../utils/helpers';
 import { PLATFORM, ROUTES } from '../../../utils/constants';
 import { Ionicons, Foundation, MaterialIcons } from '@expo/vector-icons';
 import { Form, Button } from '../../../common';
+import { func, number } from 'prop-types';
 
 const { fontSize, color } = baseStyles.buttonContent;
 
@@ -29,6 +31,14 @@ const icons = {
 };
 
 class Score extends Component {
+  static propTypes = {
+    decreaseStep: func.isRequired,
+    startQuiz: func.isRequired,
+    quizId: number.isRequired,
+    deck: deckShape.isRequired,
+    correct: number.isRequired
+  };
+
   static navigationOptions = setQuizTitle;
 
   state = {
@@ -39,10 +49,17 @@ class Score extends Component {
     this.props.navigation.setParams({ unsetGoBack: this.unsetGoBack });
   }
 
+  /**
+   * Allows navigationOptions to access the state
+   * @param  {Function} callback
+   */
   unsetGoBack = callback => {
     this.setState({ goBack: false }, callback);
   };
 
+  /**
+   * Updates the step if the user goes back to the previous card
+   */
   onWillBlur = () => {
     const { decreaseStep, quizId } = this.props;
 
@@ -57,6 +74,9 @@ class Score extends Component {
     }
   };
 
+  /**
+   * Navigates back to the deck detail
+   */
   backToDeck = () => {
     const { navigation, deck } = this.props;
     this.setState({ goBack: false }, () => {
@@ -67,6 +87,9 @@ class Score extends Component {
     });
   };
 
+  /**
+   * Calls Redux to start a new quiz and goes back to the first screen
+   */
   restartQuiz = () => {
     const { navigation, startQuiz, deck } = this.props;
     this.setState({ goBack: false }, () => {
