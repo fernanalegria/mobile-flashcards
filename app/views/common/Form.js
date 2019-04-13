@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import baseStyles from '../styles';
 
 const Form = ({ children }) => (
-  <View style={styles.container}>
+  <View style={baseStyles.center}>
     <View style={styles.form}>{children}</View>
   </View>
 );
@@ -10,12 +11,7 @@ const Form = ({ children }) => (
 const styles = StyleSheet.create({
   form: {
     width: 280,
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center'
+    ...baseStyles.stretch
   }
 });
 

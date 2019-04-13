@@ -21,7 +21,7 @@ const DeckListItem = ({ deck, navigation }) => (
           });
         }}
       >
-        <View style={styles.deckCard}>
+        <View style={baseStyles.center}>
           <Text style={styles.title}>{deck.title}</Text>
           <Text style={styles.cards}>{getNumberOfCards(deck.cards)}</Text>
         </View>
@@ -49,10 +49,6 @@ const styles = StyleSheet.create({
     ...baseStyles.textCenter,
     fontSize: 16,
     color: colors.boulder
-  },
-  deckCard: {
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   button: {
     padding: 20

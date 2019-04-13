@@ -86,7 +86,7 @@ class Score extends Component {
     return (
       <View style={styles.container}>
         <NavigationEvents onWillBlur={this.onWillBlur} />
-        <View style={styles.cardContainer}>
+        <View style={baseStyles.center}>
           <View style={baseStyles.card}>
             <View style={styles.header}>
               <Text style={styles.textHeader}>Your score</Text>
@@ -124,9 +124,7 @@ const borderRadius = Platform.OS === PLATFORM.iOS ? 16 : 2;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'stretch',
+    ...baseStyles.screenContainer,
     backgroundColor: colors.athensGray
   },
   header: {
@@ -134,8 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blueWood,
     borderTopLeftRadius: borderRadius,
     borderTopRightRadius: borderRadius,
-    justifyContent: 'center',
-    alignItems: 'center'
+    ...baseStyles.center
   },
   textHeader: {
     fontSize: 25,
@@ -154,18 +151,13 @@ const styles = StyleSheet.create({
   },
   scoreContainer: {
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'stretch'
+    ...baseStyles.stretch
   },
   button: {
     marginTop: 10,
     marginBottom: 10,
     marginRight: 25,
     marginLeft: 25
-  },
-  cardContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 });
 

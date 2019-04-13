@@ -6,17 +6,26 @@ const textCenter = {
   textAlign: 'center'
 };
 
+const stretch = {
+  justifyContent: 'center',
+  alignItems: 'stretch'
+};
+
 export default StyleSheet.create({
   textCenter,
+  stretch,
   center: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
+  screenContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'stretch'
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch'
+    ...stretch
   },
   row: {
     flexDirection: 'row',
